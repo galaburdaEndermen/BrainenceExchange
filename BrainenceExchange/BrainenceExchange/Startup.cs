@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using BrainenceExchange.Models.Data;
+using BrainenceExchange.Services;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
@@ -58,17 +60,20 @@ namespace BrainenceExchange
                 }
                 );
 
-            
 
-            // services.AddDbContext<ApplicationDbContext>(options =>
-            //     options.UseNpgsql(Configuration["ConnectionStrings:MainDB"]));
-            // services.AddTransient<IDataRepository, PsqlDataRepository>();
- 
-            // var jwtSection = Configuration.GetSection("JwtBearerTokenSettings");
-            // services.Configure<JwtBearerTokenSettings>(jwtSection);
-            
-           
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseNpgsql(Configuration["ConnectionStrings:MainDB"]));
+            services.AddTransient<IDataRepository, PsqlDataRepository>();
+
+            services.AddSingleton(Configuration);
+            services.AddSingleton<ICurrencyService, ConfigurationCurrencyService>();
+            services.AddSingleton<ICurrencyDataService, ExchangeRatesApiCurrencyDataService>();
+            services.AddTransient<IExchangeService, ExchangeService>();
+
+
+
+            //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddHttpClient();
 
             services.AddSpaStaticFiles(configuration =>
