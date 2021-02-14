@@ -1,0 +1,23 @@
+.container{
+    position: relative;
+    /* width: 540px; */
+    /* overflow: hidden; */
+    width: 100vw;
+    /* height: 80px; */
+    min-height: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    /* margin-top: 18px; */
+    /* margin-bottom: 20px; */
+    z-index: 0;
+    /* background-color: grey; */
+    padding-top: 1px;
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-bottom: 1px;
+    display: flex;
+    flex-wrap: wrap;   
+    justify-content: space-around;
+    align-items: center;
+
+}

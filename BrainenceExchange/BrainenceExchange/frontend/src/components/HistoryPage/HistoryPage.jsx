@@ -146,55 +146,69 @@ const HistoryPage = () => {
 
     return (
         <>
-            History Page
 
-            <Select
-                mode="multiple"
-                allowClear
-                style={{ width: '100%' }}
-                placeholder="Please select"
-                value={selectedFrom}
-                onChange={onFromChange}
-            >
-                {availableCurrency.map(currency =>
-                    <Option
-                        key={currency}
-                        value={currency}
-                    >
-                        <img src={`https://localhost:5001/api/Pictures/Get/${currency}`} style={{ width: 24, height: 24 }} /> {currency}
-                    </Option>
-                )
-                }
-            </Select>
+            <div className={styles.container}>
+                <h4>From</h4>
+                <h4>To</h4>
+            </div>
 
-            <Select
-                mode="multiple"
-                allowClear
-                style={{ width: '100%' }}
-                placeholder="Please select"
-                value={selectedTo}
-                onChange={onToChange}
-            >
-                {availableCurrency.map(currency =>
-                    <Option
-                        key={currency}
-                        value={currency}
-                    >
-                        <img src={`https://localhost:5001/api/Pictures/Get/${currency}`} style={{ width: 24, height: 24 }} /> {currency}
-                    </Option>
-                )
-                }
-            </Select>
+            <div className={styles.container}>
+                <Select
+                    mode="multiple"
+                    allowClear
+                    style={{ width: '50%' }}
+                    placeholder="Please select"
+                    value={selectedFrom}
+                    onChange={onFromChange}
+                >
+                    {availableCurrency.map(currency =>
+                        <Option
+                            key={currency}
+                            value={currency}
+                        >
+                            <img src={`https://localhost:5001/api/Pictures/Get/${currency}`} style={{ width: 24, height: 24 }} /> {currency}
+                        </Option>
+                    )
+                    }
+                </Select>
 
-            <Select value={orderColumn} style={{ width: 200 }} onChange={handleColumnChange}>
-                <Option value="FromCurrencyCode">From currency code</Option>
-                <Option value="FromAmount">From amount</Option>
-                <Option value="ToCurrencyCode">To currency code</Option>
-                <Option value="ToAmount">To amount</Option>
-                <Option value="Date">Date</Option>
-            </Select>
-            <Switch checkedChildren="Descending" unCheckedChildren="Ascend" onChange={handleDescendingChange} checked={descending} />
-            <RangePicker showTime onChange={onDatesChange} />
+
+
+                <Select
+                    mode="multiple"
+                    allowClear
+                    style={{ width: '50%' }}
+                    placeholder="Please select"
+                    value={selectedTo}
+                    onChange={onToChange}
+                >
+                    {availableCurrency.map(currency =>
+                        <Option
+                            key={currency}
+                            value={currency}
+                        >
+                            <img src={`https://localhost:5001/api/Pictures/Get/${currency}`} style={{ width: 24, height: 24 }} /> {currency}
+                        </Option>
+                    )
+                    }
+                </Select>
+            </div>
+
+
+            <div className={styles.container}>
+
+                <Select value={orderColumn} style={{ width: 200 }} onChange={handleColumnChange}>
+                    <Option value="FromCurrencyCode">From currency code</Option>
+                    <Option value="FromAmount">From amount</Option>
+                    <Option value="ToCurrencyCode">To currency code</Option>
+                    <Option value="ToAmount">To amount</Option>
+                    <Option value="Date">Date</Option>
+                </Select>
+                <Switch checkedChildren="Descending" unCheckedChildren="Ascend" onChange={handleDescendingChange} checked={descending} />
+                <RangePicker showTime onChange={onDatesChange} />
+            </div>
+
+
 
             <Table dataSource={entries} pagination={false}>
                 <ColumnGroup title="Info">
