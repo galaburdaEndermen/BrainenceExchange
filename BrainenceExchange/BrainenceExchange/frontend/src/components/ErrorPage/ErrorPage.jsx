@@ -1,7 +1,9 @@
+import styles from './ErrorPageStyle.module.css';
+
 const ErrorPage = () => {
     return (
         <>
-            error page
+            <h1>ERROR!</h1>
         </>
     );
 }

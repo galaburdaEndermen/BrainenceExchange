@@ -11,7 +11,9 @@ namespace BrainenceExchange.Models.Queries
 
         public IEnumerable<string> ToCurrencyCodes { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateTime StartDate { get; set; }
+
+        public DateTime EndDate { get; set; }
 
         public string OrderColumnName { get; set; }
 

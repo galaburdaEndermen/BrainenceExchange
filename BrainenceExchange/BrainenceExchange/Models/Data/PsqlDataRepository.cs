@@ -18,7 +18,29 @@ namespace BrainenceExchange.Models.Data
 
         public async Task<(List<ExchangeEntry> entries, int count)> GetEntriesAsync(HistoryQuery query)
         {
-            var entries = context.ExchangeEntries.Where(entry => query.FromCurrencyCodes.Contains(entry.FromCurrencyCode) && query.ToCurrencyCodes.Contains(entry.ToCurrencyCode));
+            if (query.FromCurrencyCodes == null)
+            {
+                query.FromCurrencyCodes = new List<string>();
+            }
+            if (query.ToCurrencyCodes == null)
+            {
+                query.ToCurrencyCodes = new List<string>();
+            }
+            if (query.EndDate == DateTime.MinValue || query.EndDate < query.StartDate)
+            {
+                query.EndDate = DateTime.MaxValue;
+            }
+
+            var entries = context.ExchangeEntries.Where(
+                entry => 
+            query.FromCurrencyCodes.Contains(entry.FromCurrencyCode)
+            &&
+            query.ToCurrencyCodes.Contains(entry.ToCurrencyCode)
+            &&
+            entry.Date >= query.StartDate 
+            &&
+            entry.Date <= query.EndDate
+            );
 
             var orderedEntries = query.OrderColumnName switch
             {

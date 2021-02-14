@@ -1,0 +1,22 @@
+.inputs{
+    display: flex;
+    flex-wrap: wrap;   
+    justify-content: center;
+    align-items:center;
+}
+
+.input{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.icon{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: xx-large;
+    cursor: pointer;
+}

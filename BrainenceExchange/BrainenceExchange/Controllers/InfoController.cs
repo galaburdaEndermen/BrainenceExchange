@@ -13,7 +13,6 @@ namespace BrainenceExchange.Controllers
     public class InfoController : ControllerBase
     {
         private readonly ICurrencyService currencyService;
-
         public InfoController(ICurrencyService currencyService)
         {
             this.currencyService = currencyService;

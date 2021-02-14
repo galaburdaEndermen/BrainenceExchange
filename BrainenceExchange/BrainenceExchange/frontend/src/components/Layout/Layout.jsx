@@ -1,10 +1,13 @@
 import NavMenu from "../NavMenu/NavMenu"
+import styles from './LayoutStyle.module.css';
 
 const Layout = (props) => {
     return (
         <>
             <NavMenu />
-            {props.children}
+            <div className={styles.content}>
+                {props.children}
+            </div>
         </>
     );
 }
