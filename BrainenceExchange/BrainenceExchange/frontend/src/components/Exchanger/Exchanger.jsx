@@ -5,9 +5,11 @@ import 'antd/dist/antd.css';
 import { Select } from 'antd';
 import { InputNumber } from 'antd';
 import { Button } from 'antd';
+import { getExchange, getAvailableCurrency } from "../../utils/endpoints";
 import {
     SwapOutlined,
 } from '@ant-design/icons';
+import getPictureUrlByCode from '../../utils/getPictureUrlByCode';
 
 const { Option } = Select;
 
@@ -58,7 +60,7 @@ const Exchanger = () => {
     }
     function onExchange() {
         console.log('onExchange');
-        axios.get("https://localhost:5001/api/Exchange", {
+        axios.get(getExchange, {
             params: {
                 "FromCurrencyCode": from,
                 "Amount": amount,
@@ -74,7 +76,7 @@ const Exchanger = () => {
     }
 
     useEffect(() => {
-        axios.get("https://localhost:5001/api/Info/AvailableCurrency").then(res => {
+        axios.get(getAvailableCurrency).then(res => {
             setAvailableCurrency(res.data);
         });
     }, [])
@@ -91,7 +93,7 @@ const Exchanger = () => {
                                 key={currency}
                                 value={currency}
                             >
-                                <img src={`https://localhost:5001/api/Pictures/Get/${currency}`} style={{ width: 24, height: 24 }} /> {currency}
+                                <img src={getPictureUrlByCode(currency)} style={{ width: 24, height: 24 }} /> {currency}
                             </Option>
                         )
                         }
@@ -108,7 +110,7 @@ const Exchanger = () => {
                                 key={currency}
                                 value={currency}
                             >
-                                <img src={`https://localhost:5001/api/Pictures/Get/${currency}`} style={{ width: 24, height: 24 }} /> {currency}
+                                <img src={getPictureUrlByCode(currency)} style={{ width: 24, height: 24 }} /> {currency}
                             </Option>
                         )
                         }

@@ -6,7 +6,9 @@ import { Pagination } from 'antd';
 import { Select } from 'antd';
 import { Switch } from 'antd';
 import { DatePicker } from 'antd';
+import { getHistory, getAvailableCurrency } from "../../utils/endpoints";
 import { Table, Space } from 'antd';
+import getPictureUrlByCode from '../../utils/getPictureUrlByCode';
 const { Option } = Select;
 const { Column, ColumnGroup } = Table;
 const { RangePicker } = DatePicker;
@@ -35,7 +37,7 @@ const HistoryPage = () => {
     function getEntries() {
         setPage(1);
         // debugger;
-        axios.get("https://localhost:5001/api/History", {
+        axios.get(getHistory, {
             params: {
                 "FromCurrencyCodes": [...selectedFrom],
                 "OrderColumnName": orderColumn,
@@ -90,7 +92,7 @@ const HistoryPage = () => {
     }
 
     useEffect(() => {
-        axios.get("https://localhost:5001/api/Info/AvailableCurrency").then(res => {
+        axios.get(getAvailableCurrency).then(res => {
             setAvailableCurrency(res.data);
             setSelectedFrom(res.data);
             setSelectedTo(res.data);
@@ -100,7 +102,7 @@ const HistoryPage = () => {
     function handlePageChange(page, pageSize) {
         setPage(page);
 
-        axios.get("https://localhost:5001/api/History", {
+        axios.get(getHistory, {
             params: {
                 "FromCurrencyCodes": [...selectedFrom],
                 "OrderColumnName": orderColumn,
@@ -122,7 +124,7 @@ const HistoryPage = () => {
 
     useEffect(() => {
         if (availableCurrency.length) {
-            axios.get("https://localhost:5001/api/History", {
+            axios.get(getHistory, {
                 params: {
                     "FromCurrencyCodes": [...availableCurrency],
                     "OrderColumnName": "Date",
@@ -166,7 +168,7 @@ const HistoryPage = () => {
                             key={currency}
                             value={currency}
                         >
-                            <img src={`https://localhost:5001/api/Pictures/Get/${currency}`} style={{ width: 24, height: 24 }} /> {currency}
+                            <img src={getPictureUrlByCode(currency)} style={{ width: 24, height: 24 }} /> {currency}
                         </Option>
                     )
                     }
@@ -187,7 +189,7 @@ const HistoryPage = () => {
                             key={currency}
                             value={currency}
                         >
-                            <img src={`https://localhost:5001/api/Pictures/Get/${currency}`} style={{ width: 24, height: 24 }} /> {currency}
+                            <img src={getPictureUrlByCode(currency)} style={{ width: 24, height: 24 }} /> {currency}
                         </Option>
                     )
                     }
@@ -225,7 +227,7 @@ const HistoryPage = () => {
                 <Column title="From currency" dataIndex="fromCurrencyCode" key="fromCurrencyCode"
                     render={code => (
                         <>
-                            <img src={`https://localhost:5001/api/Pictures/Get/${code}`} style={{ width: 24, height: 24 }} /> {code}
+                            <img src={getPictureUrlByCode(code)} style={{ width: 24, height: 24 }} /> {code}
                         </>
                     )}
                 />
@@ -234,7 +236,7 @@ const HistoryPage = () => {
                 <Column title="To currency" dataIndex="toCurrencyCode" key="toCurrencyCode"
                     render={code => (
                         <>
-                            <img src={`https://localhost:5001/api/Pictures/Get/${code}`} style={{ width: 24, height: 24 }} /> {code}
+                            <img src={getPictureUrlByCode(code)} style={{ width: 24, height: 24 }} /> {code}
                         </>
                     )}
                 />
